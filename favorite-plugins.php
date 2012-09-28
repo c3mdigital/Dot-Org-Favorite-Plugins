@@ -1,7 +1,7 @@
 <?php
 /*
-Plugin Name: Favorite Plugin Widget
-Plugin URI: http://plugins.wordpress.org/favorite-plugins/
+Plugin Name: Favorite Plugins Widget
+Plugin URI: http://plugins.wordpress.org/favorite-plugin-widget
 Description: Show your favorite plugins from your WordPress.org profile along with author and star ratings
 Version: 1.0
 Author: Chris Olbekson
