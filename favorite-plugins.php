@@ -107,6 +107,7 @@ class C3M_My_Favs extends WP_Widget {
 		$per_page = $instance['per_page'];
 		$stars = (bool)$instance['stars'];
 		$authors = (bool)$instance['authors'];
+		$show_profile_link = (bool)$instance['show_profile_link'];
 
 		$api_data = get_transient( '_c3m_favorite_plugins' );
 
@@ -141,6 +142,10 @@ class C3M_My_Favs extends WP_Widget {
 			endif; ?>
 			</li><?php
 		}
+
+		if( $show_profile_link ): ?>
+			<a href="http://profiles.wordpress.org/<?php echo $instance['wp_user'] ?>" target="_blank"><?php _e( 'See all plugins' ) ?></a>
+		<?php endif;
 		echo '</ul>';
 
 		/**
@@ -158,6 +163,7 @@ class C3M_My_Favs extends WP_Widget {
 		$instance['per_page'] = absint( $new_instance['per_page'] );
 		$instance['stars'] = (bool)$new_instance['stars'];
 		$instance['authors'] = (bool)$new_instance['authors'];
+		$instance['show_profile_link'] = (bool)$new_instance['show_profile_link'];
 
 		delete_transient( '_c3m_favorite_plugins' );
 
@@ -172,6 +178,7 @@ class C3M_My_Favs extends WP_Widget {
 		$per_page  = isset( $instance['per_page'] ) ? absint( $instance['per_page'] ) : 5;
 		$stars = isset( $instance['stars'] ) ? (bool)$instance['stars'] : true;
 		$authors = isset( $instance['authors'] ) ? (bool)$instance['authors'] : true;
+		$show_profile_link = isset( $instance['show_profile_link'] ) ? (bool)$instance['show_profile_link'] : true;
 		?>
 
 		<p><label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title:' ); ?></label>
@@ -188,6 +195,9 @@ class C3M_My_Favs extends WP_Widget {
 
         <p><input class="checkbox" type="checkbox" <?php checked( $authors ); ?> id="<?php echo $this->get_field_id( 'authors' ); ?>" name="<?php echo $this->get_field_name( 'authors' ); ?>"/>
 		<label for="<?php echo $this->get_field_id( 'authors' ); ?>"><?php _e( 'Display Plugin Authors?' ); ?></label></p>
+
+        <p><input class="checkbox" type="checkbox" <?php checked( $show_profile_link ); ?> id="<?php echo $this->get_field_id( 'show_profile_link' ); ?>" name="<?php echo $this->get_field_name( 'show_profile_link' ); ?>"/>
+		<label for="<?php echo $this->get_field_id( 'show_profile_link' ); ?>"><?php _e( 'Show Profile Link?' ); ?></label></p>
 
 	<?php }
 
