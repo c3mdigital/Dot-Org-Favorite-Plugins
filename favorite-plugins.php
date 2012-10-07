@@ -108,6 +108,7 @@ class C3M_My_Favs extends WP_Widget {
 		$stars = (bool)$instance['stars'];
 		$authors = (bool)$instance['authors'];
 		$show_profile_link = (bool)$instance['show_profile_link'];
+		$shuffle_plugins = (bool)$instance['shuffle_plugins'];
 
 		$api_data = get_transient( '_c3m_favorite_plugins' );
 
@@ -126,6 +127,9 @@ class C3M_My_Favs extends WP_Widget {
 		echo $before_title . apply_filters( 'widget_title', $title ) . $after_title;
 		echo '<ul class="c3m-favorites">';
 		$c = 0;
+		
+		if ( $shuffle_plugins ) shuffle( $api_plugins );
+
 		foreach( $api_plugins as $plugin ) {
 			$c++;
 			if ( $c > $per_page )
@@ -164,6 +168,7 @@ class C3M_My_Favs extends WP_Widget {
 		$instance['stars'] = (bool)$new_instance['stars'];
 		$instance['authors'] = (bool)$new_instance['authors'];
 		$instance['show_profile_link'] = (bool)$new_instance['show_profile_link'];
+		$instance['shuffle_plugins'] = (bool)$new_instance['shuffle_plugins'];
 
 		delete_transient( '_c3m_favorite_plugins' );
 
@@ -179,6 +184,7 @@ class C3M_My_Favs extends WP_Widget {
 		$stars = isset( $instance['stars'] ) ? (bool)$instance['stars'] : true;
 		$authors = isset( $instance['authors'] ) ? (bool)$instance['authors'] : true;
 		$show_profile_link = isset( $instance['show_profile_link'] ) ? (bool)$instance['show_profile_link'] : true;
+		$shuffle_plugins = isset( $instance['shuffle_plugins'] ) ? (bool)$instance['shuffle_plugins'] : true;
 		?>
 
 		<p><label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title:' ); ?></label>
@@ -198,6 +204,9 @@ class C3M_My_Favs extends WP_Widget {
 
         <p><input class="checkbox" type="checkbox" <?php checked( $show_profile_link ); ?> id="<?php echo $this->get_field_id( 'show_profile_link' ); ?>" name="<?php echo $this->get_field_name( 'show_profile_link' ); ?>"/>
 		<label for="<?php echo $this->get_field_id( 'show_profile_link' ); ?>"><?php _e( 'Show Profile Link?' ); ?></label></p>
+
+        <p><input class="checkbox" type="checkbox" <?php checked( $shuffle_plugins ); ?> id="<?php echo $this->get_field_id( 'shuffle_plugins' ); ?>" name="<?php echo $this->get_field_name( 'shuffle_plugins' ); ?>"/>
+		<label for="<?php echo $this->get_field_id( 'shuffle_plugins' ); ?>"><?php _e( 'Shuffle Plugins?' ); ?></label></p>
 
 	<?php }
 
